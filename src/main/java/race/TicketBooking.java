@@ -20,6 +20,7 @@ public class TicketBooking {
 
     public void book() {
         logger.info("Waiting to book ticket for : " + Thread.currentThread().getName());
+        lock.lock();
         if (ticketsAvailable > 0) {
             logger.info("Booking ticket for : " + Thread.currentThread().getName());
             try {
@@ -28,9 +29,11 @@ public class TicketBooking {
                 e.printStackTrace();
             }
             ticketsAvailable--;
+            lock.unlock();
             logger.info("Ticket BOOKED for : " + Thread.currentThread().getName());
             logger.info("currently ticketsAvailable = " + ticketsAvailable);
         } else {
+            lock.unlock();
             logger.info("Ticket NOT BOOKED for : " + Thread.currentThread().getName());
         }
     }

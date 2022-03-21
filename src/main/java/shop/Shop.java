@@ -12,18 +12,19 @@ public class Shop {
 
     static Logger logger = Logger.getLogger(Shop.class);
     Lock lock;
-    EnumMap warehouse = new EnumMap(Items.class);
+    EnumMap<Items, Integer> warehouse = new EnumMap(Items.class);
 
 
     public Shop(Lock lock) {
         this.lock = lock;
         warehouse.put(Items.GARNEK, 100);
-        warehouse.put(Items.TALERZ, 50);
-        warehouse.put(Items.SZKLANKA, 200);
+        warehouse.put(Items.TALERZ, 20);
+        warehouse.put(Items.SZKLANKA, 80);
     }
 
     public void purchase(Items item) {
-        logger.info("Byuing " + item);
+        this.lock = lock;
+        logger.info("Buying " + item);
         logger.info("Purchase Accepted");
         logger.info("Purchase Declined - no items in the store");
     }
